@@ -1,0 +1,637 @@
+/* Global Styles & Variables for Advanced AI Theme */
+:root {
+    --primary-color: #00FFFF; /* Neon Cyan */
+    --primary-dark: #00C2C2;
+    --secondary-color: #A020F0; /* Purple accent */
+    --background-dark: #02050A; /* Even deeper, almost black */
+    --card-background: rgba(255, 255, 255, 0.08); /* Slightly transparent card */
+    --text-color-light: #E0E0E0; /* Light grey text */
+    --text-color-medium: #BBBBBB;
+    --border-color: rgba(255, 255, 255, 0.15); /* Faint border */
+    --shadow-color-dark: rgba(0, 0, 0, 0.6); /* Deeper shadow for contrast */
+    --glow-color: #00FFFF; /* Matches primary for glow */
+    --button-gradient-start: #00FFFF;
+    --button-gradient-end: #4A90E2; /* Blends cyan with original blue */
+    --error-bg: #401A24;
+    --error-border: #8B0000;
+    --error-text: #FF6347;
+    --success-bg: #1A3E2A;
+    --success-border: #2E8B57;
+    --success-text: #32CD32;
+
+    /* New variables for AI video game background theme */
+    --grid-line-color-faint: rgba(0, 255, 255, 0.02); /* Very faint grid lines */
+    --grid-line-color-active: rgba(0, 255, 255, 0.08); /* Slightly brighter for active lines */
+    --grid-spacing-lg: 80px; /* Large grid */
+    --grid-spacing-md: 40px; /* Medium grid */
+    --grid-spacing-sm: 20px; /* Small grid */
+    --particle-color: rgba(255, 255, 255, 0.1); /* For subtle particles/stars */
+    --glitch-color: rgba(0, 255, 255, 0.05); /* For the subtle glitch effect */
+    --circuit-line-color: rgba(0, 255, 255, 0.04); /* For diagonal circuit lines */
+    --scanline-color: rgba(0, 0, 0, 0.05); /* For subtle scanlines */
+}
+
+html {
+    height: 100%; /* Ensure html takes full height */
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px; /* Add padding to body for overall spacing */
+    background-color: var(--background-dark);
+    color: var(--text-color-light);
+    display: flex;
+    flex-direction: column; /* Make body a column flex container */
+    min-height: 100vh; /* Ensure body takes full viewport height */
+    box-sizing: border-box;
+    /* REMOVED: overflow: hidden; */ /* Allow scrolling */
+    position: relative; /* For background positioning */
+}
+
+/* AI Video Game Theme Background */
+.background-animation {
+    position: fixed; /* Keep background fixed while content scrolls */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Multiple background layers for depth and animation */
+    background:
+        /* Layer 1: Subtle Particles/Stars (farthest back) */
+        radial-gradient(circle at 10% 20%, var(--particle-color) 1px, transparent 1px) 0 0 / 300px 300px,
+        radial-gradient(circle at 50% 80%, var(--particle-color) 1px, transparent 1px) 50px 50px / 350px 350px,
+        radial-gradient(circle at 80% 30%, var(--particle-color) 1px, transparent 1px) 100px 100px / 400px 400px,
+
+        /* Layer 2: Large, very faint, slow-moving grid */
+        repeating-linear-gradient(to right,
+            transparent 0%, transparent calc(var(--grid-spacing-lg) - 1px),
+            var(--grid-line-color-faint) calc(var(--grid-spacing-lg) - 1px), var(--grid-line-color-faint) var(--grid-spacing-lg)
+        ),
+        repeating-linear-gradient(to bottom,
+            transparent 0%, transparent calc(var(--grid-spacing-lg) - 1px),
+            var(--grid-line-color-faint) calc(var(--grid-spacing-lg) - 1px), var(--grid-line-color-faint) var(--grid-spacing-lg)
+        ),
+
+        /* Layer 3: Medium, slightly brighter, faster-moving grid */
+        repeating-linear-gradient(to right,
+            transparent 0%, transparent calc(var(--grid-spacing-md) - 1px),
+            var(--grid-line-color-active) calc(var(--grid-spacing-md) - 1px), var(--grid-line-color-active) var(--grid-spacing-md)
+        ),
+        repeating-linear-gradient(to bottom,
+            transparent 0%, transparent calc(var(--grid-spacing-md) - 1px),
+            var(--grid-line-color-active) calc(var(--grid-spacing-md) - 1px), var(--grid-line-color-active) var(--grid-spacing-md)
+        ),
+
+        /* Layer 4: Diagonal Circuit Lines (moving) */
+        repeating-linear-gradient(45deg,
+            transparent 0%, transparent 10px,
+            var(--circuit-line-color) 10px, var(--circuit-line-color) 12px,
+            transparent 12px, transparent 22px
+        ),
+        repeating-linear-gradient(-45deg,
+            transparent 0%, transparent 10px,
+            var(--circuit-line-color) 10px, var(--circuit-line-color) 12px,
+            transparent 12px, transparent 22px
+        ),
+
+        /* Layer 5: Pulsating Central Radial Glow (middle layer) */
+        radial-gradient(circle at 50% 50%,
+            rgba(0, 255, 255, 0.12) 0%, /* Brighter inner glow */
+            rgba(0, 255, 255, 0.06) 20%,
+            rgba(0, 0, 0, 0) 60%
+        ),
+
+        /* Layer 6: Subtle Horizontal Scanlines / Noise (closest to user) */
+        linear-gradient(to bottom, var(--scanline-color) 1px, transparent 1px) 0 0 / 100% 2px,
+
+        /* Layer 7: Base gradient (farthest back) */
+        linear-gradient(135deg, var(--background-dark) 0%, #101018 50%, #05050A 100%);
+    
+    background-size: 
+        /* Particles */
+        300px 300px, 350px 350px, 400px 400px,
+        /* Large Grid */
+        var(--grid-spacing-lg) var(--grid-spacing-lg),
+        var(--grid-spacing-lg) var(--grid-spacing-lg),
+        /* Medium Grid */
+        var(--grid-spacing-md) var(--grid-spacing-md),
+        var(--grid-spacing-md) var(--grid-spacing-md),
+        /* Diagonal Circuit Lines */
+        40px 40px, 40px 40px,
+        /* Glow */
+        150% 150%,
+        /* Scanlines */
+        100% 100%,
+        /* Base */
+        cover;
+
+    background-position: 
+        /* Particles */
+        0 0, 50px 50px, 100px 100px,
+        /* Large Grid */
+        0 0, 0 0,
+        /* Medium Grid */
+        0 0, 0 0,
+        /* Diagonal Circuit Lines */
+        0 0, 0 0,
+        /* Glow */
+        50% 50%,
+        /* Scanlines */
+        0 0,
+        /* Base */
+        0 0;
+
+    animation:
+        moveParticles 60s linear infinite,
+        moveGridLg 30s linear infinite,
+        moveGridMd 20s linear infinite,
+        moveCircuit 15s linear infinite,
+        pulseGlow 8s ease-in-out infinite alternate,
+        flickerScanlines 0.5s steps(1, end) infinite; /* Fast flicker for scanlines */
+    z-index: -1;
+    opacity: 0.98;
+}
+
+/* Animations for the AI Video Game Theme Background */
+
+/* Particles move slowly across the screen */
+@keyframes moveParticles {
+    0% { background-position: 
+        0 0, 50px 50px, 100px 100px, /* Particles */
+        0 0, 0 0, /* Large Grid */
+        0 0, 0 0, /* Medium Grid */
+        0 0, 0 0, /* Circuit Lines */
+        50% 50%, /* Glow */
+        0 0, /* Scanlines */
+        0 0; /* Base */ 
+    }
+    100% { background-position: 
+        -300px -300px, -350px -350px, -400px -400px, /* Particles move */
+        0 0, 0 0, /* Large Grid */
+        0 0, 0 0, /* Medium Grid */
+        0 0, 0 0, /* Circuit Lines */
+        50% 50%, /* Glow */
+        0 0, /* Scanlines */
+        0 0; /* Base */
+    }
+}
+
+/* Large grid moves very slowly */
+@keyframes moveGridLg {
+    from { background-position: 
+        0 0, 50px 50px, 100px 100px, /* Particles */
+        0 0, /* Horizontal grid */
+        0 0, /* Vertical grid */
+        0 0, 0 0, /* Medium Grid */
+        0 0, 0 0, /* Circuit Lines */
+        50% 50%, /* Glow */
+        0 0, /* Scanlines */
+        0 0; /* Base */
+    }
+    to { background-position: 
+        0 0, 50px 50px, 100px 100px, /* Particles */
+        var(--grid-spacing-lg) 0, /* Shift X */
+        0 var(--grid-spacing-lg), /* Shift Y */
+        0 0, 0 0, /* Medium Grid */
+        0 0, 0 0, /* Circuit Lines */
+        50% 50%, /* Glow */
+        0 0, /* Scanlines */
+        0 0; /* Base */
+    }
+}
+
+/* Medium grid moves faster */
+@keyframes moveGridMd {
+    from { background-position: 
+        0 0, 50px 50px, 100px 100px, /* Particles */
+        0 0, 0 0, /* Large Grid */
+        0 0, /* Horizontal grid */
+        0 0, /* Vertical grid */
+        0 0, 0 0, /* Circuit Lines */
+        50% 50%, /* Glow */
+        0 0, /* Scanlines */
+        0 0; /* Base */
+    }
+    to { background-position: 
+        0 0, 50px 50px, 100px 100px, /* Particles */
+        0 0, 0 0, /* Large Grid */
+        var(--grid-spacing-md) 0, /* Shift X */
+        0 var(--grid-spacing-md), /* Shift Y */
+        0 0, 0 0, /* Circuit Lines */
+        50% 50%, /* Glow */
+        0 0, /* Scanlines */
+        0 0; /* Base */
+    }
+}
+
+/* Diagonal circuit lines move */
+@keyframes moveCircuit {
+    from { background-position: 
+        0 0, 50px 50px, 100px 100px, /* Particles */
+        0 0, 0 0, /* Large Grid */
+        0 0, 0 0, /* Medium Grid */
+        0 0, /* Diagonal 1 */
+        0 0, /* Diagonal 2 */
+        50% 50%, /* Glow */
+        0 0, /* Scanlines */
+        0 0; /* Base */
+    }
+    to { background-position: 
+        0 0, 50px 50px, 100px 100px, /* Particles */
+        0 0, 0 0, /* Large Grid */
+        0 0, 0 0, /* Medium Grid */
+        40px 40px, /* Shift Diagonal 1 */
+        -40px 40px, /* Shift Diagonal 2 (opposite direction) */
+        50% 50%, /* Glow */
+        0 0, /* Scanlines */
+        0 0; /* Base */
+    }
+}
+
+/* Central glow pulses */
+@keyframes pulseGlow {
+    0% { background-size: 
+        /* Particles */
+        300px 300px, 350px 350px, 400px 400px,
+        /* Grids */
+        var(--grid-spacing-lg) var(--grid-spacing-lg), var(--grid-spacing-lg) var(--grid-spacing-lg),
+        var(--grid-spacing-md) var(--grid-spacing-md), var(--grid-spacing-md) var(--grid-spacing-md),
+        /* Circuit */
+        40px 40px, 40px 40px,
+        /* Glow */
+        150% 150%, /* Pulse this layer */
+        /* Scanlines */
+        100% 100%,
+        /* Base */
+        cover;
+    }
+    100% { background-size: 
+        /* Particles */
+        300px 300px, 350px 350px, 400px 400px,
+        /* Grids */
+        var(--grid-spacing-lg) var(--grid-spacing-lg), var(--grid-spacing-lg) var(--grid-spacing-lg),
+        var(--grid-spacing-md) var(--grid-spacing-md), var(--grid-spacing-md) var(--grid-spacing-md),
+        /* Circuit */
+        40px 40px, 40px 40px,
+        /* Glow */
+        170% 170%, /* Pulse this layer */
+        /* Scanlines */
+        100% 100%,
+        /* Base */
+        cover;
+    }
+}
+
+/* Scanlines flicker */
+@keyframes flickerScanlines {
+    0% { opacity: 1; }
+    50% { opacity: 0.8; }
+    100% { opacity: 1; }
+}
+
+
+/* Container */
+.container {
+    width: 100%;
+    max-width: 960px;
+    margin: 60px auto 40px auto; /* Top margin, auto horizontal, bottom margin */
+    background: var(--card-background);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px var(--shadow-color-dark); /* Deeper shadow */
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    border: 1px solid var(--border-color); /* Subtle border for definition */
+    backdrop-filter: blur(5px); /* Frosted glass effect */
+    -webkit-backdrop-filter: blur(5px); /* Safari support */
+    position: relative; /* For z-index stacking */
+    z-index: 1; /* Bring to front */
+    flex-grow: 1; /* Allow container to grow and push footer down */
+}
+
+/* Headings */
+h1 {
+    font-family: 'Orbitron', sans-serif; /* Futuristic font */
+    color: var(--primary-color);
+    text-align: center;
+    font-size: 3rem; /* Larger heading */
+    margin-bottom: 25px;
+    font-weight: 700;
+    letter-spacing: 2px; /* Wider spacing */
+    text-shadow: 0 0 20px var(--glow-color), 0 0 40px var(--primary-color), 0 0 60px var(--primary-color); /* Neon glow */
+}
+
+h2 {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--text-color-light);
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    font-weight: 600;
+    text-align: center;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 10px;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+}
+
+h3 {
+    color: var(--primary-color);
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    font-weight: 500;
+    text-shadow: 0 0 5px rgba(0, 255, 255, 0.2);
+}
+
+/* Section Styling */
+.section {
+    padding: 25px;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.2); /* Darker, slightly transparent background */
+    box-shadow: 0 4px 20px var(--shadow-color-dark);
+}
+
+/* Form Group Styling */
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--text-color-medium);
+    font-size: 1rem;
+}
+
+input[type="file"],
+textarea,
+select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 1rem;
+    color: var(--text-color-light);
+    background-color: rgba(0, 0, 0, 0.3); /* Darker input fields */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    -webkit-appearance: none; /* Remove default styling for cross-browser consistency */
+}
+
+input[type="file"] {
+    padding: 8px 15px;
+    background-color: rgba(0, 0, 0, 0.4);
+    color: var(--text-color-medium);
+}
+
+textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+input[type="file"]:focus,
+textarea:focus,
+select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 255, 255, 0.3), 0 0 10px var(--glow-color); /* Enhanced focus glow */
+    outline: none;
+}
+
+/* Button Styling */
+.btn {
+    display: flex; /* Use flexbox for centering text and spinner */
+    align-items: center;
+    justify-content: center;
+    gap: 10px; /* Space between text and spinner */
+    width: 100%;
+    padding: 14px 20px;
+    background: linear-gradient(45deg, var(--button-gradient-start), var(--button-gradient-end));
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 25px rgba(0, 255, 255, 0.4); /* Stronger glow shadow */
+    letter-spacing: 0.5px;
+    position: relative; /* For spinner positioning */
+    overflow: hidden;
+}
+
+.btn:hover:not(:disabled) { /* Hover effect only when not disabled */
+    background: linear-gradient(45deg, var(--button-gradient-end), var(--button-gradient-start));
+    box-shadow: 0 8px 30px rgba(0, 255, 255, 0.6);
+    transform: translateY(-2px);
+}
+
+.btn:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: 0 2px 15px rgba(0, 255, 255, 0.4);
+}
+
+.btn:disabled {
+    background: linear-gradient(45deg, #444, #666);
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+
+.button-text {
+    transition: opacity 0.3s ease;
+}
+
+/* Loading Spinner */
+.spinner {
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-top: 4px solid var(--primary-color);
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 1s linear infinite;
+    flex-shrink: 0; /* Prevent spinner from shrinking */
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Output and Message Boxes */
+.output-box {
+    background-color: var(--success-bg);
+    border: 1px solid var(--success-border);
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 25px;
+    color: var(--success-text);
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+    font-size: 1rem;
+    line-height: 1.7;
+    overflow-wrap: break-word; /* Ensure long words break */
+}
+
+.error-message {
+    background-color: var(--error-bg);
+    border: 1px solid var(--error-border);
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 25px;
+    color: var(--error-text);
+    font-weight: 600;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+    font-size: 1rem;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    body {
+        padding: 15px;
+    }
+
+    .container {
+        padding: 25px;
+        margin: 30px auto 20px auto; /* Adjust bottom margin for smaller screens */
+        gap: 20px;
+    }
+
+    h1 {
+        font-size: 2.2rem;
+        letter-spacing: 1.5px;
+    }
+
+    h2 {
+        font-size: 1.6rem;
+    }
+
+    h3 {
+        font-size: 1.3rem;
+    }
+
+    .section {
+        padding: 20px;
+    }
+
+    .btn {
+        padding: 12px 15px;
+        font-size: 1rem;
+    }
+
+    input[type="file"],
+    textarea,
+    select {
+        padding: 10px 12px;
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        padding: 20px;
+        margin: 20px auto 15px auto; /* Adjust bottom margin for smaller screens */
+        border-radius: 8px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+        letter-spacing: 1px;
+    }
+
+    h2 {
+        font-size: 1.4rem;
+    }
+
+    .section {
+        padding: 15px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+}
+/* Footer Styling */
+.app-footer {
+    width: 100%;
+    max-width: 960px; /* Match container width */
+    margin: auto auto 20px auto; /* Push to bottom, center horizontally, fixed bottom margin */
+    padding: 20px;
+    text-align: center;
+    color: var(--text-color-medium);
+    font-size: 0.9rem;
+    border-top: 1px solid var(--border-color); /* Subtle separator */
+    padding-top: 25px;
+    backdrop-filter: blur(3px); /* Match the frosted glass effect */
+    -webkit-backdrop-filter: blur(3px);
+    background-color: rgba(0, 0, 0, 0.1); /* Slightly transparent background */
+    border-radius: 8px;
+    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.2); /* Subtle shadow at the top */
+    z-index: 0; /* Ensure it's below the main container but above background */
+    position: relative; /* For z-index */
+}
+
+.app-footer p {
+    margin: 5px 0;
+}
+
+.footer-name {
+    color: var(--primary-color); /* Highlight your name with primary color */
+    font-weight: 600;
+    text-shadow: 0 0 5px rgba(0, 255, 255, 0.3); /* Subtle glow */
+}
+
+.linkedin-link {
+    color: var(--secondary-color); /* Use secondary color for the link */
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.linkedin-link:hover {
+    color: var(--primary-color); /* Change color on hover */
+    text-shadow: 0 0 10px var(--glow-color); /* Stronger glow on hover */
+}
+
+/* Responsive adjustments for footer */
+@media (max-width: 768px) {
+    .app-footer {
+        margin-top: 30px; /* Ensure space from content */
+        padding: 15px;
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .app-footer {
+        margin-top: 20px; /* Ensure space from content */
+        padding: 10px;
+        font-size: 0.8rem;
+    }
+}
+/* LinkedIn Icon Styling */
+.linkedin-icon {
+    width: 20px; /* Adjust size as needed */
+    height: 20px;
+    vertical-align: middle; /* Align with text */
+    margin-right: 8px; /* Space between icon and text */
+    fill: var(--secondary-color); /* Default color */
+    transition: fill 0.3s ease, text-shadow 0.3s ease; /* Smooth transition */
+}
+
+.linkedin-link:hover .linkedin-icon {
+    fill: var(--primary-color); /* Change icon color on link hover */
+    text-shadow: 0 0 10px var(--glow-color); /* Match text glow */
+}
